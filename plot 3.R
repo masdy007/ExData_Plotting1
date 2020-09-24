@@ -6,7 +6,7 @@ if(!dir.exists("data")) {
     dir.create("data")
 }
 
-# Download data
+# Downlaod data
 file.url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 file.path <- "data/household_power_consumption.zip"
 download.file(fileurl, file.path)
@@ -30,12 +30,21 @@ data$Date <- strptime(data$Date, format="%d/%m/%Y")
 ## Subset Data only for 2007-02-01 and 2007-02-02
 dat <- subset(data, Date == "2007-02-01" | Date == "2007-02-02")
 
-## Create Plot 2
-plot(dat$DT, dat$Global_active_power, type="l", 
-     xlab="", 
-     ylab="Global Active Power (Kilowatts)")
 
-## Save Plot 2
-dev.copy(png, "plot2.png", width = 480, height = 480)
+# Create Plot 3
+png("plot3.png",  width = 480, height = 480, units = "px")
+plot(dat$DT, dat$Sub_metering_1, type="n", ylim=c(0,40),ylab="Energy sub metering", xlab="")
+
+## Add lines
+lines(dat$DT, dat$Sub_metering_1, type="l")
+lines(dat$DT, dat$Sub_metering_2, type="l", col="red")
+lines(dat$DT, dat$Sub_metering_3, type="l", col="blue")
+
+# Create Legend
+legend("topright", 
+       c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
+       col=c("black","red","blue"),
+       lty = 1)
+
 
 dev.off()

@@ -31,6 +31,10 @@ data$Date <- strptime(data$Date, format="%d/%m/%Y")
 dat <- subset(data, Date == "2007-02-01" | Date == "2007-02-02")
 
 # Create Plot 1
-png("plot1.png",  width = 480, height = 480, units = "px")
-hist(dat$Global_active_power, main="Global Active Power", xlab="Global Active Power (kilowatts)", col="red")
+hist(dat$Global_active_power, 
+     main="Global Active Power", xlab="Global Active Power (kilowatts)", col="red")
+
+## Save Plot
+dev.copy(png, "plot.png", width = 480, height = 480)
+
 dev.off()
