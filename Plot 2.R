@@ -6,7 +6,7 @@ if(!dir.exists("data")) {
     dir.create("data")
 }
 
-# Downlaod data
+# Download data
 file.url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 file.path <- "data/household_power_consumption.zip"
 download.file(fileurl, file.path)
@@ -30,7 +30,7 @@ data$Date <- strptime(data$Date, format="%d/%m/%Y")
 ## Subset Data only for 2007-02-01 and 2007-02-02
 dat <- subset(data, Date == "2007-02-01" | Date == "2007-02-02")
 
-# Create Plot 1
-png("plot1.png",  width = 480, height = 480, units = "px")
-hist(dat$Global_active_power, main="Global Active Power", xlab="Global Active Power (kilowatts)", col="red")
+## Create Plot 2
+png("plot2.png",  width = 480, height = 480, units = "px")
+plot(dat$DT, dat$Global_active_power, type="l", xlab="", ylab="Global Active Power (Kilowatts)")
 dev.off()
